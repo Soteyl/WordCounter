@@ -3,14 +3,14 @@ namespace WordCounter.Models.Interfaces;
 public interface IPhraseDensitiesModel
 {
     /// <summary>
-    /// Amount of words in one phrase
+    /// Count of words in one phrase
     /// </summary>
-    public int WordsAmount { get; set; }
+    public int WordsCount { get; set; }
 
     /// <summary>
-    /// Amount of phrases to show
+    /// Count of phrases to show
     /// </summary>
-    public int PhrasesAmount { get; set; }
+    public int PhrasesCount { get; set; }
 
     /// <summary>
     /// Url of the website to analize for densities

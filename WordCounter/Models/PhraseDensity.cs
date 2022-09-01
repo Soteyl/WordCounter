@@ -13,7 +13,7 @@
         public int RepeatCount { get; set; }
 
         /// <summary>
-        /// Maximum possible amount of phrases in particular text
+        /// Maximum possible count of phrases in particular text
         /// </summary>
         public int AllPhrasesInTextCount { get; set; }
 

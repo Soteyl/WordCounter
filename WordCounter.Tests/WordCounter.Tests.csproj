@@ -20,4 +20,10 @@
     <ProjectReference Include="..\WordCounter\WordCounter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="resources\page.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

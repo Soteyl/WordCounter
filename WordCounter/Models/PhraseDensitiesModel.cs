@@ -11,16 +11,16 @@ namespace WordCounter.Models
     public class PhraseDensitiesModel: IPhraseDensitiesModel
     {
         /// <summary>
-        /// Amount of words in one phrase
+        /// Count of words in one phrase
         /// </summary>
         [BindProperty]
-        public int WordsAmount { get; set; } = 1;
+        public int WordsCount { get; set; } = 1;
 
         /// <summary>
-        /// Amount of phrases to show
+        /// Count of phrases to show
         /// </summary>
         [BindProperty]
-        public int PhrasesAmount { get; set; } = 4;
+        public int PhrasesCount { get; set; } = 4;
 
         /// <summary>
         /// Url of the website to analize for densities

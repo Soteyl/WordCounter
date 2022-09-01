@@ -35,38 +35,38 @@ namespace WordCounter.Core
             _splittedWordsWithoutArticles = _splittedWords.Where(word => _articles.Contains(word) == false).ToArray();
         }
 
-        public IEnumerable<PhraseDensity> GetPhrasesDensity(int wordsInPhraseAmount, bool withoutArticles)
+        public IEnumerable<PhraseDensity> GetPhrasesDensity(int wordsInPhraseCount, bool withoutArticles)
         {
-            if (wordsInPhraseAmount < 1)
-                throw new ArgumentException("Minimum words amount: 1");
+            if (wordsInPhraseCount < 1)
+                throw new ArgumentException("Minimum words count: 1");
             
             // In original website without articles feature works only while 1 word in phrase
-            if (withoutArticles && wordsInPhraseAmount == 1)
+            if (withoutArticles && wordsInPhraseCount == 1)
             {
-                return GetPhraseDensities(_splittedWordsWithoutArticles, wordsInPhraseAmount);
+                return GetPhraseDensities(_splittedWordsWithoutArticles, wordsInPhraseCount);
             }
-            return GetPhraseDensities(_splittedWords, wordsInPhraseAmount);
+            return GetPhraseDensities(_splittedWords, wordsInPhraseCount);
         }
 
-        private IEnumerable<PhraseDensity> GetPhraseDensities(string[] splittedWords, int wordsInPhraseAmount)
+        private IEnumerable<PhraseDensity> GetPhraseDensities(string[] splittedWords, int wordsInPhraseCount)
         {
-            int wordsAmount = splittedWords.Length;
+            int wordsCount = splittedWords.Length;
             List<PhraseDensity> densities = new List<PhraseDensity>();
 
-            int stepsAmount = wordsAmount - wordsInPhraseAmount + 1;
+            int stepsCount = wordsCount - wordsInPhraseCount + 1;
 
             for (int firstPhraseWordIndex = 0;
-                firstPhraseWordIndex < stepsAmount;
+                firstPhraseWordIndex < stepsCount;
                 firstPhraseWordIndex++)
             {
-                var combinedFirst = CombineWords(splittedWords, firstPhraseWordIndex, wordsInPhraseAmount);
+                var combinedFirst = CombineWords(splittedWords, firstPhraseWordIndex, wordsInPhraseCount);
                 var density = densities.FirstOrDefault(den => den.Phrase.Equals(combinedFirst));
                 if (density == null)
                 {
                     density = new PhraseDensity()
                     {
                         Phrase = combinedFirst,
-                        AllPhrasesInTextCount = _splittedWords.Length - wordsInPhraseAmount
+                        AllPhrasesInTextCount = _splittedWords.Length - wordsInPhraseCount
                     };
                     densities.Add(density);
                 }
@@ -75,11 +75,11 @@ namespace WordCounter.Core
             return densities;
         }
 
-        private string CombineWords(string[] splittedWords, int index, int wordsAmount)
+        private string CombineWords(string[] splittedWords, int index, int wordsCount)
         {
             var sb = new StringBuilder(splittedWords[index]);
             
-            for (int i = 1; i < wordsAmount; i++)
+            for (int i = 1; i < wordsCount; i++)
             {
                 sb.Append(' ');
                 sb.Append(splittedWords[index + i]);

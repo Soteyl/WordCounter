@@ -19,7 +19,7 @@ namespace WordCounter.Core
         /// <summary>
         /// Analyzes web page and updates the model
         /// </summary>
-        /// <param name="model">Model with url, words and phrases amount</param>
+        /// <param name="model">Model with url, words and phrases count</param>
         /// <returns>Densities</returns>
         public IEnumerable<PhraseDensity> AnalyzePage(IPhraseDensitiesModel model)
         {
@@ -32,10 +32,10 @@ namespace WordCounter.Core
             var densityCounter = new PhraseDensityCounter(innerText);
             
             IEnumerable<PhraseDensity>? densities = densityCounter
-                .GetPhrasesDensity(model.WordsAmount, model.WithoutArticles)
+                .GetPhrasesDensity(model.WordsCount, model.WithoutArticles)
                 .OrderByDescending(den => den.RepeatCount);
             
-            return densities.Take(model.PhrasesAmount);
+            return densities.Take(model.PhrasesCount);
         }
     }
 }

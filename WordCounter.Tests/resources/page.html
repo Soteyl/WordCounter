@@ -1,0 +1,148 @@
+
+<html data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css" id="ctre_styles">
+			#ctre_wnd {
+				position: fixed; bottom: 0; right: 10px; width: 360px; padding: 10px 20px;
+				box-sizing: content-box;
+				text-align: left; font-family: Helvetica, Arial, sans-serif;
+				background: #fff; box-shadow: 0px 0px 40px rgba(0,0,0,0.15);
+				z-index: 2147483647;
+				font-size: 12px; color: #666;
+			}
+			#ctre_wnd * {
+				line-height: 1.3; font-size: inherit; color: inherit;
+				font-weight: normal; font-style: normal; font-family: inherit;
+				cursor: default;
+			}
+			#ctre_wnd a, #ctre_wnd input[type=checkbox] { cursor: pointer; }
+
+			#ctre_wnd .ct_minimize, #ctre_wnd .ct_close {
+				display: block; cursor: pointer;
+				position: absolute; top: 0; right: 0; width: 32px; line-height: 32px;
+				font-size: 14px; text-align: center;
+				transition: color 0.3s, background 0.3s;
+			}
+			#ctre_wnd .ct_minimize { right: 32px; background: #fff; color: #0fb4d4; }
+			#ctre_wnd .ct_minimize:hover { background: #0fb4d4; color: #fff; }
+			#ctre_wnd .ct_minimize i {
+				display: inline-block; cursor: pointer;
+				transform: rotate(45deg); transition: transform 0.5s;
+			}
+			#ctre_wnd .ct_close { color: #f00; background: #fff0f0; }
+			#ctre_wnd .ct_close:hover { color: #fff; background: #f00; }
+			#ctre_wnd .key {
+				display: inline-block;
+				font-family: monospace;
+				background: #f7f7f7; color: #999;
+				padding: 0 2px; margin: 0 2px;
+				border: solid 1px #d5d5d5; border-radius: 3px;
+			}
+			#ctre_wnd .ct_logo { font-size: 15px; font-weight: bold; }
+			#ctre_wnd .ct_logo.small { display: none; }
+			#ctre_wnd .ct_logo svg {
+				fill: #666; vertical-align: -15%;
+				transform: rotate(-240deg); transition: transform 1s;
+			}
+			#ctre_wnd .ct_logo.anim svg { transform: rotate(0deg); }
+
+			#ctre_wnd .version { color: #bbb; }
+			#ctre_wnd .keys { font-size: 11px; overflow: hidden; margin-top: 4px; color: #bbb; }
+			#ctre_wnd .ct_settings { font-size: 11px; overflow: hidden; margin: 8px 0; color: #bbb; }
+			#ctre_wnd .ct_settings a { color: #999; }
+			#ctre_wnd .ct_settings a:hover { color: #666; }
+			#ctre_wnd .activationKeys { float: left; margin-left: -2px; }
+			#ctre_wnd .transposeKeys { float: right; }
+			#ctre_current_elm {
+				font-family: monospace; background: #f7f7f7; color: #d5d5d5; padding: 2px; margin: 10px 0;
+				max-height: 84px; overflow: hidden;
+			}
+			#ctre_current_elm .pathNode { color: #999; border-bottom: solid 2px rgba(0,0,0,0); }
+			#ctre_current_elm .pathNode.active { border-bottom: solid 2px #555; }
+
+			#ctre_elm_list { display: none; margin: 0 -20px; background: #f7f7f7; border: solid 12px #f7f7f7; border-width: 12px 0 12px 0; max-height: 90px; overflow: auto; }
+			#ctre_elm_list.hasContent { display: block; }
+			#ctre_elm_list table { border: 0; width: 100%; border-spacing: 0; }
+			#ctre_elm_list tr { border: 0; }
+			#ctre_elm_list tr.ct_heading td { color: #bbb; }
+			#ctre_elm_list td { padding: 0; border: 0; background: #f7f7f7; }
+			#ctre_elm_list tr:nth-child(even) td { background: #fcfcfc; }
+			#ctre_elm_list td:nth-child(1) { padding-left: 20px; }
+			#ctre_elm_list td:nth-child(2) { text-align: center; }
+			#ctre_elm_list td:nth-child(3) { padding-right: 20px; }
+			#ctre_elm_list tr:not(.ct_heading) td:nth-child(1) { font-family: monospace; font-size: 11px; }
+			#ctre_elm_list td input { display: inline; -webkit-appearance: checkbox; }
+			#ctre_elm_list td input:before, #ctre_elm_list td input:after { content: none; }
+			#ctre_elm_list .ct_edit_selector { font-family: sans-serif; float: right; opacity: 0; color: #0fb4d4; text-decoration: none; }
+			#ctre_elm_list .ct_edit_selector:hover { color: #000; }
+			#ctre_elm_list tr:hover .ct_edit_selector { opacity: 1; }
+			#ctre_elm_list a.ct_delete { color: #f00; padding: 4px; text-decoration: none; font-size: 14px; }
+			#ctre_elm_list a.ct_delete:hover { color: #fff; background: #f00; }
+
+			#ctre_wnd .ct_more { border-top: solid 1px #f7f7f7; margin: 0 -20px; padding-top: 12px; color: #bbb; font-size: 10px; text-align: center; }
+			#ctre_wnd .ct_more a { color: #0fb4d4; font-size: inherit; text-decoration: none; transition: color 0.5s; }
+			#ctre_wnd .ct_more a:hover { color: #000; }
+
+			#ctre_wnd.minimized { width: 80px; height: 12px; }
+			#ctre_wnd.minimized > * { display: none; }
+			#ctre_wnd.minimized .ct_minimize,
+			#ctre_wnd.minimized .ct_close { display: block; }
+			#ctre_wnd.minimized .ct_minimize i { display: inline-block; transform: rotate(-135deg); }
+			#ctre_wnd.minimized .ct_logo.small { display: block; margin: -4px 0 0 -10px; }
+			</style></head><body><panel class="drweb_select-panel" style="display: none;">
+  <div class="drweb_tool-panel"> 
+    <div class="drweb_tool-icon drweb_tool-icon_show" data-co="restore-btn" title="Restore"></div> 
+    <div class="drweb_tool-icon drweb_tool-icon_remove" data-co="remove-btn" title="Remove"></div> 
+    <div class="drweb_fit-btn" data-co="fit-btn" title=""></div> 
+  </div> 
+  <span data-co="label">Select the elements you want to hide on this page.</span> 
+  <div class="drweb_btn" data-co="save">Save</div> 
+  <div class="drweb_btn" data-co="cancel">Cancel</div> 
+  <div class="drweb_panel-plug" data-co="plug" style="display: none"></div>
+</panel><header>
+<title>The World Wide Web project</title>
+<nextid n="55">
+</nextid></header>
+
+<h1>World Wide Web</h1>The WorldWideWeb (W3) is a wide-area<a name="0" href="http://info.cern.ch/hypertext/WWW/WhatIs.html">
+hypermedia</a> information retrieval
+initiative aiming to give universal
+access to a large universe of documents.<p>
+Everything there is online about
+W3 is linked directly or indirectly
+to this document, including an <a name="24" href="http://info.cern.ch/hypertext/WWW/Summary.html">executive
+summary</a> of the project, <a name="29" href="http://info.cern.ch/hypertext/WWW/Administration/Mailing/Overview.html">Mailing lists</a>
+, <a name="30" href="http://info.cern.ch/hypertext/WWW/Policy.html">Policy</a> , November's  <a name="34" href="http://info.cern.ch/hypertext/WWW/News/9211.html">W3  news</a> ,
+<a name="41" href="http://info.cern.ch/hypertext/WWW/FAQ/List.html">Frequently Asked Questions</a> .
+</p><dl>
+<dt><a name="44" href="http://info.cern.ch/hypertext/DataSources/Top.html">What's out there?</a>
+</dt><dd> Pointers to the
+world's online information,<a name="45" href="http://info.cern.ch/hypertext/DataSources/bySubject/Overview.html"> subjects</a>
+, <a name="z54" href="http://info.cern.ch/hypertext/DataSources/WWW/Servers.html">W3 servers</a>, etc.
+</dd><dt><a name="46" href="http://info.cern.ch/hypertext/WWW/Help.html">Help</a>
+</dt><dd> on the browser you are using
+</dd><dt><a name="13" href="http://info.cern.ch/hypertext/WWW/Status.html">Software Products</a>
+</dt><dd> A list of W3 project
+components and their current state.
+(e.g. <a name="27" href="http://info.cern.ch/hypertext/WWW/LineMode/Browser.html">Line Mode</a> ,X11 <a name="35" href="http://info.cern.ch/hypertext/WWW/Status.html#35">Viola</a> ,  <a name="26" href="http://info.cern.ch/hypertext/WWW/NeXT/WorldWideWeb.html">NeXTStep</a>
+, <a name="25" href="http://info.cern.ch/hypertext/WWW/Daemon/Overview.html">Servers</a> , <a name="51" href="http://info.cern.ch/hypertext/WWW/Tools/Overview.html">Tools</a> ,<a name="53" href="http://info.cern.ch/hypertext/WWW/MailRobot/Overview.html"> Mail robot</a> ,<a name="52" href="http://info.cern.ch/hypertext/WWW/Status.html#57">
+Library</a> )
+</dd><dt><a name="47" href="http://info.cern.ch/hypertext/WWW/Technical.html">Technical</a>
+</dt><dd> Details of protocols, formats,
+program internals etc
+</dd><dt><a name="40" href="http://info.cern.ch/hypertext/WWW/Bibliography.html">Bibliography</a>
+</dt><dd> Paper documentation
+on  W3 and references.
+</dd><dt><a name="14" href="http://info.cern.ch/hypertext/WWW/People.html">People</a>
+</dt><dd> A list of some people involved
+in the project.
+</dd><dt><a name="15" href="http://info.cern.ch/hypertext/WWW/History.html">History</a>
+</dt><dd> A summary of the history
+of the project.
+</dd><dt><a name="37" href="http://info.cern.ch/hypertext/WWW/Helping.html">How can I help</a> ?
+</dt><dd> If you would like
+to support the web..
+</dd><dt><a name="48" href="http://info.cern.ch/hypertext/README.html">Getting code</a>
+</dt><dd> Getting the code by<a name="49" href="http://info.cern.ch/hypertext/WWW/LineMode/Defaults/Distribution.html">
+anonymous FTP</a> , etc.
+</dd></dl>
+
+<div style="position: static !important;"></div></body></html>
