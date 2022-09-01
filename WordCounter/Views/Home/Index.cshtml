@@ -1,0 +1,35 @@
+﻿@model PhraseDensitiesModel
+@{
+    ViewData["Title"] = "Count words";
+}
+
+<form method="post">
+    <label>Link: </label>
+    <input type="url" asp-for="Url" value="@Model.Url" />
+    <br />
+    <label>Words amount in phrase:</label>
+    <input type="number" asp-for="WordsAmount" value="@Model.WordsAmount" min="1" />
+    <br />
+    <label>Top phrases amount to show:</label>
+    <input type="number" asp-for="PhrasesAmount" value="@Model.PhrasesAmount" min="1" />
+    <br />
+    <input type="checkbox" asp-for="WithoutArticles" checked="@Model.WithoutArticles" />
+    <label for="WithoutArticles">Without articles</label>
+    <br/>
+    <input type="submit" Value="Analize page" />
+</form>
+
+@if (Model.CurrentDensities != null)
+{
+    <table class="table">
+        <tr><td>Phrase</td><td>Repeats</td><td>Density</td></tr>
+        @foreach (var density in Model.CurrentDensities)
+        {
+            <tr>
+                <td>@density.Phrase</td>
+                <td>@density.RepeatAmount</td>
+                <td>@density.GetDensity()</td>
+            </tr>
+        }
+    </table>
+}
