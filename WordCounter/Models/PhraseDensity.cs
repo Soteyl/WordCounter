@@ -8,19 +8,19 @@
         public string? Phrase { get; set; }
 
         /// <summary>
-        /// Amount of repeating this phrase in particular text
+        /// Count of repeating this phrase in particular text
         /// </summary>
-        public int RepeatAmount { get; set; }
+        public int RepeatCount { get; set; }
 
         /// <summary>
         /// Maximum possible amount of phrases in particular text
         /// </summary>
-        public int AllPhrasesInTextAmount { get; set; }
+        public int AllPhrasesInTextCount { get; set; }
 
         /// <summary>
         /// Counts density of some phrase in particular text
         /// </summary>
         /// <returns>percentage of density</returns>
-        public double GetDensity() => Math.Round(100.0 / AllPhrasesInTextAmount * RepeatAmount, 2); 
+        public double GetDensity() => Math.Round(100.0 / AllPhrasesInTextCount * RepeatCount, 2); 
     }
 }

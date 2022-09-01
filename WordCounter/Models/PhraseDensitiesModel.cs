@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WordCounter.Core;
+using WordCounter.Models.Interfaces;
 
 namespace WordCounter.Models
 {
     /// <summary>
     /// View model for phrase density page.
     /// </summary>
-    public class PhraseDensitiesModel
+    public class PhraseDensitiesModel: IPhraseDensitiesModel
     {
         /// <summary>
         /// Amount of words in one phrase
@@ -36,6 +37,6 @@ namespace WordCounter.Models
         /// <summary>
         /// Current densties to show
         /// </summary>
-        public IEnumerable<PhraseDensity> CurrentDensities { get; set; }
+        public IEnumerable<PhraseDensity>? CurrentDensities { get; set; }
     }
 }

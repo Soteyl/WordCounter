@@ -1,9 +1,16 @@
+using WordCounter.Core;
+using WordCounter.Core.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPhraseDensityByUrlService, PhraseDensityByUrlService>();
+builder.Services.AddScoped<IHtmlContentLoader, HtmlContentLoader>();
+builder.Services.AddScoped<IWebPageAnalyzer, WebPageAnalyzer>();
 
 var app = builder.Build();
 

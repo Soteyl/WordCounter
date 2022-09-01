@@ -7,33 +7,19 @@ namespace WordCounter.Tests;
 public class DensityByUrlServiceTests
 {
     [Fact]
-    public void Kuku()
-    {
-        // Arrange
-        var service = new PhraseDensityByUrlService();
-
-        // Act
-        var result = service.Initialize();
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.Null(result.Url);
-    }
-
-    [Fact]
-    public void Returns_Analized_Page_With_Articles()
+    public void Returns_Analyzed_Page_With_Articles()
     {
         // Arrange
         var expected = new[]
         {
-            new PhraseDensity { Phrase = "the", RepeatAmount = 10 },
-            new PhraseDensity { Phrase = "of", RepeatAmount = 7 },
-            new PhraseDensity { Phrase = "w3", RepeatAmount = 6 },
-            new PhraseDensity { Phrase = "project", RepeatAmount = 5 },
+            new PhraseDensity { Phrase = "the", RepeatCount = 10 },
+            new PhraseDensity { Phrase = "of", RepeatCount = 7 },
+            new PhraseDensity { Phrase = "w3", RepeatCount = 6 },
+            new PhraseDensity { Phrase = "project", RepeatCount = 5 },
         };
         
-        var service = new PhraseDensityByUrlService();
-        var model = service.Initialize();
+        var service = new PhraseDensityByUrlService(new WebPageAnalyzer(new HtmlContentLoader()));
+        var model = new PhraseDensitiesModel();
         // first website page, will be static long
         model.Url = "http://info.cern.ch/hypertext/WWW/TheProject.html";
         model.WithoutArticles = false;
@@ -41,7 +27,7 @@ public class DensityByUrlServiceTests
         model.WordsAmount = 1;
         
         // Act
-        model = service.AnalizePage(model);
+        model.CurrentDensities = service.AnalyzePage(model);
 
         // Assert
         Assert.NotNull(model);
@@ -49,7 +35,7 @@ public class DensityByUrlServiceTests
         for (int i = 0; i < expected.Length; i++)
         {
             Assert.Equal(densitiesArray[i].Phrase, expected[i].Phrase);
-            Assert.Equal(densitiesArray[i].RepeatAmount, expected[i].RepeatAmount);
+            Assert.Equal(densitiesArray[i].RepeatCount, expected[i].RepeatCount);
         }
     }
 }

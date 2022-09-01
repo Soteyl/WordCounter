@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Xml.Linq;
 using WordCounter.Core;
+using WordCounter.Core.Interfaces;
 using WordCounter.Models;
 
 namespace WordCounter.Controllers
@@ -11,23 +12,24 @@ namespace WordCounter.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly PhraseDensityByUrlService _densityService;
+        private readonly IPhraseDensityByUrlService _densityService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IPhraseDensityByUrlService densityService)
         {
             _logger = logger;
-            _densityService = new PhraseDensityByUrlService();
+            _densityService = densityService;
         }
 
         public IActionResult Index()
         {
-            return View(_densityService.Initialize());
+            return View(new PhraseDensitiesModel());
         }
 
         [HttpPost("/")]
-        public IActionResult AnalizePage(PhraseDensitiesModel model)
+        public IActionResult AnalyzePage(PhraseDensitiesModel model)
         {
-            return View("index", _densityService.AnalizePage(model));
+            model.CurrentDensities = _densityService.AnalyzePage(model);
+            return View("index", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
